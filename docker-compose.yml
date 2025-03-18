@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  oracle-db:
+    image: container-registry.oracle.com/database/express:21.3.0-xe
+    container_name: oracle-db
+    environment:
+      ORACLE_PWD: "your_password"
+      ORACLE_CHARACTERSET: "AL32UTF8"
+    ports:
+      - "1521:1521"
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+
+  backend:
+    build: ./backend
+    container_name: fastapi-backend
+    depends_on:
+      - oracle-db
+    environment:
+      DATABASE_URL: "oracle+cx_oracle://system:your_password@oracle-db:1521/XEPDB1"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build: ./frontend
+    container_name: nextjs-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    environment:
+      NEXT_PUBLIC_API_URL: "http://backend:8000"
+
+volumes:
+  oracle-data:

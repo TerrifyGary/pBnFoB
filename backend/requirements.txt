@@ -1,0 +1,4 @@
+# requirements.txt (FastAPI Backend Dependencies)
+fastapi
+uvicorn
+cx_Oracle
