@@ -2,3 +2,5 @@
 fastapi
 uvicorn
 cx_Oracle
+pydantic
+oracledb
