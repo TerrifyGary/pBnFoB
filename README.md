@@ -1,7 +1,6 @@
 # pBnFoB
-Sure! Here’s the content formatted as a `README.md` file:
 
-```markdown
+
 # Project Overview
 
 This project consists of a full-stack web application with the following technologies:
