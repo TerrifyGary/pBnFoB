@@ -1,6 +1,7 @@
 # main.py (FastAPI Backend)
 from app.models import UserRegister
 from fastapi import FastAPI,HTTPException # type: ignore
+from fastapi.middleware.cors import CORSMiddleware
 import oracledb
 
 app = FastAPI()
@@ -9,6 +10,15 @@ app = FastAPI()
 DB_USER = "SYSTEM"
 DB_PASSWORD = "your_password"
 DB_DSN = "localhost:1521/XEPDB1"  # Update this based on your Oracle DB
+
+# Allow frontend to call the API
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins (for development)
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allow all headers
+)
 
 # Create a connection pool for better performance
 pool = oracledb.create_pool(
