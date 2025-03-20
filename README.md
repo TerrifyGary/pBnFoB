@@ -1,90 +1,141 @@
-# pBnFoB
+# 🥷 Ninja Registration System
 
+A **black minimalist** and **Japanese ninja-style** user registration system, built with **FastAPI, Next.js, and OracleDB**. Users can securely sign up with their **shinobi name, secret email, and hidden password**.
 
-# Project Overview
+---
 
-This project consists of a full-stack web application with the following technologies:
+## ⚡ Tech Stack
+- **Frontend**: Next.js (React) 🕶️
+- **Backend**: FastAPI (Python) ⚔️
+- **Database**: OracleDB (PL/SQL) 🏯
+- **Containerization**: Docker 🐳
 
-- **Frontend**: [Next.js](https://nextjs.org/)
-- **Backend**: [FastAPI](https://fastapi.tiangolo.com/)
-- **Database**: [Oracle DB](https://www.oracle.com/database/)
-- **Containerization**: [Docker](https://www.docker.com/)
+---
 
-The application is designed to be fully containerized using Docker and Docker Compose, with three separate services for the frontend, backend, and Oracle database.
+## 🎯 Features
+✅ **Ninja-Themed UI**: Dark, minimalist, and inspired by Japanese aesthetics.  
+✅ **Secure User Registration**: Stores hashed passwords for safety.  
+✅ **FastAPI with Swagger**: API documentation enabled for easy testing.  
+✅ **OracleDB Integration**: Uses Dapper and SQLAlchemy to interact with the database.  
+✅ **Containerized Deployment**: Each service runs in its own Docker container.  
 
-## Project Structure
+---
 
-- **Frontend**: Next.js application responsible for user interaction.
-- **Backend**: FastAPI backend providing RESTful APIs.
-- **Database**: Oracle DB for storing application data.
+## 🔧 Setup Instructions
 
-## Setup and Installation
-
-### Prerequisites
-
-Ensure you have the following tools installed:
-
-- [Docker](https://www.docker.com/get-started)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-
-### Steps to Run the Project
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd <repository-directory>
-   ```
-
-2. Build and start the services using Docker Compose:
-   ```bash
-   docker-compose up --build
-   ```
-
-   This will start the following services:
-
-   - **Oracle Database**: Accessible on port `1521`.
-   - **FastAPI Backend**: Accessible on port `8000`.
-   - **Next.js Frontend**: Accessible on port `3000`.
-
-### Configuration
-
-- **Oracle Database**:
-  - The default password for the Oracle Database is set to `your_password` in the `docker-compose.yml`. Update this value as necessary.
-
-- **Backend**:
-  - The FastAPI backend is configured to connect to the Oracle database using the connection string:
-    ```
-    oracle+cx_oracle://system:your_password@oracle-db:1521/XEPDB1
-    ```
-
-- **Frontend**:
-  - The Next.js frontend is set to interact with the backend API at `http://backend:8000`.
-
-## Usage
-
-Once the services are up and running, you can access the following:
-
-- **Frontend**: Open `http://localhost:3000` in your browser to view the application.
-- **Backend**: The FastAPI backend can be accessed at `http://localhost:8000`.
-- **Swagger UI**: Access the Swagger API documentation for the backend at `http://localhost:8000/docs`.
-
-## Docker Compose Overview
-
-The `docker-compose.yml` file defines the following services:
-
-- **oracle-db**: An Oracle Database container.
-- **backend**: The FastAPI backend container.
-- **frontend**: The Next.js frontend container.
-
-Each service is configured to communicate with the others through Docker's internal network.
-
-## Volumes
-
-- **oracle-data**: A volume to persist Oracle database data.
-
-## License
-
-This project is licensed under the MIT License.
+### 1️⃣ Clone the Repository
+```sh
+git clone https://github.com/your-repo/ninja-registration.git
+cd ninja-registration
 ```
 
-You can save the above content into a file named `README.md` in the root of your project. Let me know if you need further adjustments!
+### 2️⃣ Setup OracleDB (Docker)
+Create and run the OracleDB container:
+```yaml
+oracle-db:
+  image: container-registry.oracle.com/database/express:21.3.0-xe
+  container_name: oracle-db
+  environment:
+    ORACLE_PWD: "your_password"
+    ORACLE_CHARACTERSET: "AL32UTF8"
+  ports:
+    - "1521:1521"
+  volumes:
+    - oracle-data:/opt/oracle/oradata
+```
+Run the container:
+```sh
+docker-compose up -d
+```
+
+### 3️⃣ Start the Backend (FastAPI)
+```sh
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+API Docs available at: [http://localhost:8000/docs](http://localhost:8000/docs) 📝
+
+### 4️⃣ Start the Frontend (Next.js)
+```sh
+cd frontend
+npm install
+npm run dev
+```
+Visit [http://localhost:3000](http://localhost:3000) to view the registration page.
+
+---
+
+## 🔗 API Endpoints
+
+### **User Registration**
+```http
+POST /signup/
+```
+#### **Request Body** (JSON):
+```json
+{
+  "username": "ShinobiMaster",
+  "email": "ninja@hiddenvillage.com",
+  "password": "shadowSecret"
+}
+```
+#### **Response:**
+```json
+{
+  "message": "User registered successfully"
+}
+```
+
+### **Get User Details**
+```http
+POST /useractions/getusers/
+```
+#### **Request Body** (JSON):
+```json
+{
+  "username": "ShinobiMaster",
+  "email": "ninja@hiddenvillage.com",
+  "password": "shadowSecret"
+}
+```
+#### **Response:**
+```json
+{
+  "users": [
+    {
+      "id": 21,
+      "username": "ShinobiMaster",
+      "email": "ninja@hiddenvillage.com"
+    }
+  ]
+}
+```
+
+---
+
+## 🚀 Deployment
+To deploy with **Docker**, build and run the containers:
+```sh
+docker-compose up --build
+```
+For production, use **NGINX** as a reverse proxy and configure HTTPS. 🛡️
+
+---
+
+## 🎭 Screenshots
+### **Dark Ninja Registration UI** 🥷
+![Ninja Registration](./screenshots/ninja-ui.png)
+
+---
+
+## 📜 License
+This project is licensed under the **MIT License**. Feel free to modify and improve! 🏯
+
+---
+
+## 🌊 Credits
+Built with stealth and precision by **Your Name**. 🔥
+
+---
+
