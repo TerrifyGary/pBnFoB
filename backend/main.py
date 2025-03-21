@@ -53,8 +53,8 @@ def signup(user: UserRegister):
     except oracledb.Error as e:
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
     
-@app.post("/useractions/getusers/", response_model=List[UserRegister])
-def get_users(username: str, password: str):
+@app.post("/useractions/getusers/")
+def get_users(user: UserRegister):
     try:
         conn = pool.acquire()
         cursor = conn.cursor()
@@ -63,7 +63,7 @@ def get_users(username: str, password: str):
             SELECT t.ID , t.EMAIL , t.USERNAME , t.PASSWORD FROM SYSTEM.UsersRegister t
             WHERE t.USERNAME = :username AND t.PASSWORD = :password
         """
-        cursor.execute(sql, [username, password])
+        cursor.execute(sql, [user.username, user.password])
         rows = cursor.fetchall()
 
         # Get column names for dictionary conversion
