@@ -7,7 +7,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@shadcn/ui": "^0.0.4",
+    "@tailwindcss/postcss": "^4.0.17",
+    "@tailwindcss/vite": "^4.0.17",
     "framer-motion": "^12.5.0",
+    "lucide-react": "^0.484.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
@@ -15,6 +19,9 @@
   "devDependencies": {
     "@types/node": "22.13.10",
     "@types/react": "19.0.12",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.0",
     "typescript": "5.8.2"
   }
 }

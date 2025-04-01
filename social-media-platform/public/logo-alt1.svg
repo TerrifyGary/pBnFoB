@@ -1,0 +1,8 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Speech bubble design -->
+  <path d="M20 4H4C2.9 4 2 4.9 2 6V15C2 16.1 2.9 17 4 17H7L12 22L17 17H20C21.1 17 22 16.1 22 15V6C22 4.9 21.1 4 20 4Z" stroke="currentColor" stroke-width="2" fill="none"/>
+  <circle cx="8" cy="10.5" r="1.5" fill="currentColor"/>
+  <circle cx="12" cy="10.5" r="1.5" fill="currentColor"/>
+  <circle cx="16" cy="10.5" r="1.5" fill="currentColor"/>
+</svg>
+
